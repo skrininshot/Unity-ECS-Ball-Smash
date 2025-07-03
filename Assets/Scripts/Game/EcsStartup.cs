@@ -22,8 +22,10 @@ namespace Game
             _systems = new EcsSystems(world);
             EcsSystemsRef.Systems = _systems;
             
-            GameStateController.Init(spawner); 
             var turnService = new TurnService(world);
+            
+            GameStateController.Init(spawner, turnService); 
+            uiController.Init(turnService);
 
             _systems
                 .Add(new PlayerBallAimSystem(turnService))
@@ -31,7 +33,7 @@ namespace Game
                 .Add(new AIStrategySystem(config, turnService))
                 .Add(new BallOutSystem(config))
                 .Add(new TurnControlSystem(config))
-                .Add(new WinConditionSystem(config, uiController))
+                .Add(new EndGameConditionSystem(config, uiController))
                 .Init();
             
             spawner.SpawnBalls(_systems);

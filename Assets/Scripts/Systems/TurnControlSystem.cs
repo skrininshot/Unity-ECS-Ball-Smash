@@ -8,7 +8,6 @@ namespace Systems
 {
     public class TurnControlSystem : IEcsPostRunSystem
     {
-        private float _pauseTimer = 0;
         private readonly GameConfig _config;
         
         public TurnControlSystem(GameConfig config)
@@ -22,8 +21,6 @@ namespace Systems
             var turnPool = world.GetPool<TurnComponent>();
             var requestPool = world.GetPool<EndTurnStateRequest>();
 
-            
-            
             foreach (var entity in world.Filter<TurnComponent>().End())
             {
                 ref var turn = ref turnPool.Get(entity);
@@ -33,7 +30,7 @@ namespace Systems
                     if (turn.State == TurnState.Move)
                     {
                         turn.State = TurnState.Pause;
-                        _pauseTimer += _config.pauseBetweenTurns;
+                        turn.PauseTime += _config.pauseBetweenTurns;
                     }
                     
                     foreach (var e in world.Filter<EndTurnStateRequest>().End())
@@ -42,39 +39,21 @@ namespace Systems
                 
                 if (turn.State == TurnState.Pause)
                 {
-                    if (_pauseTimer > 0)
+                    if (turn.PauseTime > 0)
                     {
-                        _pauseTimer -= Time.deltaTime;
+                        turn.PauseTime -= Time.deltaTime;
 
-                        if (_pauseTimer <= 0)
+                        if (turn.PauseTime <= 0)
                         {
                             turn.State = TurnState.Move;
                             turn.Participant = turn.Participant == TurnParticipant.Player ?
                                 TurnParticipant.AI : TurnParticipant.Player;
-                            
-                            Debug.Log("Move");
                         }
                         
                         return;
                     }
                 }
             }
-            
-            // var world = systems.GetWorld();
-            // var turnPool = world.GetPool<TurnStateComponent>();
-            // var requestPool = world.GetPool<EndTurnStateRequest>();
-            //
-            // foreach (var e in world.Filter<EndTurnStateRequest>().End()) 
-            // {
-            //     foreach (var entity in world.Filter<TurnStateComponent>().End()) 
-            //     {
-            //         ref var turn = ref turnPool.Get(entity);
-            //         turn.State = NextEnumValue(turn.State);
-            //         _pauseTimer = _config.pauseBetweenTurns;
-            //     }
-            //     
-            //     requestPool.Del(e);
-            // }
         }
     }
 }

@@ -19,8 +19,8 @@ namespace Systems
 
         public void Run(IEcsSystems systems)
         {
-            if (_turnService.CurrentState() != TurnState.Move) return;
-            if (_turnService.CurrentParticipant() != TurnParticipant.AI) return;
+            if (_turnService.CurrentTurn().State != TurnState.Move) return;
+            if (_turnService.CurrentTurn().Participant != TurnParticipant.AI) return;
             
             var world = systems.GetWorld();
             var rigidbodyPool = world.GetPool<RigidbodyRef>();

@@ -1,4 +1,3 @@
-using System;
 using Components;
 using Game.Configs;
 using Services;
@@ -6,16 +5,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEngine.Serialization;
 
 namespace Game.UI
 {
     public class UIController : MonoBehaviour 
     {
+        [SerializeField] private GameConfig config;
+        
         [Header("Game UI")]
         [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private TextMeshProUGUI turnParticipantText;
         [SerializeField] private Button menuButton;
-        [SerializeField] private GameConfig config;
         
         [Header("Main Menu Panel")]
         [SerializeField] private GameObject mainMenuPanel;
@@ -36,12 +36,19 @@ namespace Game.UI
         private string _playerScoreTextColor;
         private string _aiScoreTextColor;
 
+        private TurnService _turnService;
+        
+        public void Init(TurnService turnService)
+        {
+            _turnService = turnService;
+        }
+        
         private void OnValidate()
         {
-            _playerScoreTextColor = "#" + config.playerMaterial.color.ToHexString();
-            _aiScoreTextColor = "#" + config.aiMaterial.color.ToHexString();
+            _playerScoreTextColor = config.playerMaterial.color.ToHexString();
+            _aiScoreTextColor = config.aiMaterial.color.ToHexString();
 
-            UpdateScoreText();
+            UpdateText();
         }
 
         private void Start() 
@@ -79,39 +86,59 @@ namespace Game.UI
 
         private void Update()
         {
-            UpdateScoreText();
+            UpdateText();
         }
 
-        private void UpdateScoreText()
+        private void UpdateText()
         {
-            scoreText.text = $"<color={_playerScoreTextColor}>{ScoreService.Player}</color>:" +
-                             $"<color={_aiScoreTextColor}>{ScoreService.AI}</color>";
+            scoreText.text = $"<color=#{_playerScoreTextColor}>{ScoreService.Player}</color>:" +
+                             $"<color=#{_aiScoreTextColor}>{ScoreService.AI}</color>";
+            
+            var participant = _turnService?.CurrentTurn().Participant ?? TurnParticipant.Player;
+            var color = participant == TurnParticipant.Player ? _playerScoreTextColor : _aiScoreTextColor;
+            var text = participant == TurnParticipant.Player ? "You" : "AI";
+
+            turnParticipantText.text = $"Current turn:\n<color=#{color}>{text}</color>";
         }
 
-        public void ShowResult(bool win) {
-            resultText.text = win ? "You Win" : "You Lose";
-            
+        public void ShowResult(TurnParticipant participant) 
+        {
+            var color = participant == TurnParticipant.Player ? _playerScoreTextColor : _aiScoreTextColor;
+            var text = participant == TurnParticipant.Player ? "You Win" : "You Lose";
+            resultText.text = $"\n<color=#{color}>{text}</color>";
+                
             mainMenuPanel.SetActive(false);
             endGameMenuPanel.SetActive(true);
             _currentMenuPanel = endGameMenuPanel;
+            
+            GameStateController.PauseGame(true);
         }
         
-        private void OnRestart() {
+        private void OnRestart() 
+        {
             GameStateController.Restart();
         }
 
-        void OnMenuButton(){
+        void OnMenuButton()
+        {
+            bool show = !_currentMenuPanel.activeSelf;
+            
             _currentMenuPanel.SetActive(!_currentMenuPanel.activeSelf);
+            GameStateController.PauseGame(show);
         }
         
-        void OnSave() {
+        void OnSave() 
+        {
             GameStateController.Save();
         }
-        void OnLoad() {
+        
+        void OnLoad() 
+        {
             GameStateController.Load();
         }
         
-        private void OnQuit() {
+        private void OnQuit() 
+        {
             Application.Quit();
         }
     }

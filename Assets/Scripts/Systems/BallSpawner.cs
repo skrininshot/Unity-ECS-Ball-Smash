@@ -12,12 +12,12 @@ namespace Systems
         [SerializeField] private GameObject ballPrefab;
         [SerializeField] private GameConfig config;
         
-        public GameObject Spawn(Vector3 pos, Vector3 vel, bool isPlayer) 
+        public GameObject Spawn(Vector3 pos, Vector3 vel, TurnParticipant owner) 
         {
             var go = Instantiate(ballPrefab, pos, Quaternion.identity);
             go.GetComponent<Rigidbody>().velocity = vel;
-            go.GetComponent<BallView>().isPlayerOwned = isPlayer;
-            go.GetComponent<Renderer>().material = isPlayer ? config.playerMaterial : config.aiMaterial;
+            go.GetComponent<BallView>().Owner = owner;
+            go.GetComponent<Renderer>().material = owner == TurnParticipant.Player ? config.playerMaterial : config.aiMaterial;
             return go;
         }
         
@@ -47,7 +47,7 @@ namespace Systems
 
                 usedPositions.Add(pos);
 
-                var go = Spawn(pos, Vector3.zero, isPlayer);
+                var go = Spawn(pos, Vector3.zero, isPlayer ? TurnParticipant.Player : TurnParticipant.AI);
                 
                 var entity = world.NewEntity();
                 ballTag.Add(entity);

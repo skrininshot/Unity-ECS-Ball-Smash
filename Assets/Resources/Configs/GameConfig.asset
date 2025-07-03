@@ -15,7 +15,7 @@ MonoBehaviour:
   destroyHeight: -10
   aiBallsCount: 4
   playerBallsCount: 4
-  pauseBetweenTurns: 1
+  pauseBetweenTurns: 2
   spawnRadius: 4
   spawnMinDistance: 1.2
   playerMaterial: {fileID: 2100000, guid: 4e0424faaeda18749bc1b938dbc6edbe, type: 2}

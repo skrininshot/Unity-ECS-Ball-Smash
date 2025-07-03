@@ -1,3 +1,4 @@
+using Components;
 using Game.Configs;
 using Game.UI;
 using Leopotam.EcsLite;
@@ -5,13 +6,13 @@ using Services;
 
 namespace Systems
 {
-    public class WinConditionSystem : IEcsRunSystem 
+    public class EndGameConditionSystem : IEcsRunSystem 
     {
         private bool _gameEnded = false;
         private readonly UIController _uiController;
         private readonly GameConfig _config;
 
-        public WinConditionSystem(GameConfig config, UIController uiController) 
+        public EndGameConditionSystem(GameConfig config, UIController uiController) 
         {
             _config = config;
             _uiController = uiController;
@@ -23,13 +24,13 @@ namespace Systems
             
             if (ScoreService.Player >= _config.aiBallsCount) 
             {
-                _uiController.ShowResult(true);
+                _uiController.ShowResult(TurnParticipant.Player);
                 _gameEnded = true;
             }
             
             if (ScoreService.AI >= _config.playerBallsCount) 
             {
-                _uiController.ShowResult(false);
+                _uiController.ShowResult(TurnParticipant.AI);
                 _gameEnded = true;
             }
         }

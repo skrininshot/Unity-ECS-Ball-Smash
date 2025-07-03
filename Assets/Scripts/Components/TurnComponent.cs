@@ -4,6 +4,7 @@ namespace Components
     {
         public TurnParticipant Participant;
         public TurnState State;
+        public float PauseTime;
     }
 
     public enum TurnParticipant
