@@ -98,7 +98,7 @@ namespace Game.UI
             var color = participant == TurnParticipant.Player ? _playerScoreTextColor : _aiScoreTextColor;
             var text = participant == TurnParticipant.Player ? "You" : "AI";
 
-            turnParticipantText.text = $"Current turn:\n<color=#{color}>{text}</color>";
+            turnParticipantText.text = $"Current turn:\n<size=200%><color=#{color}>{text}</color>";
         }
 
         public void ShowResult(TurnParticipant participant) 
