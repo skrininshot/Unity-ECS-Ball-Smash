@@ -1,6 +1,6 @@
-# Unity-LeoECS-Ball-Smash
+# Unity-ECS-Ball-Smash
 
-**Unity-LeoECS-Ball-Smash** — это мой первый проект, реализованный с использованием архитектуры Entity Component System (ECS) на базе фреймворка [LeoECS Lite](https://github.com/Leopotam/ecslite).
+**Unity-ECS-Ball-Smash** — это мой первый проект, реализованный с использованием архитектуры Entity Component System (ECS) на базе фреймворка [LeoECS Lite](https://github.com/Leopotam/ecslite).
 
 ## О проекте
 
@@ -28,4 +28,4 @@
 
 ## Статус
 
-Проект находится в процессе изучения и доработки. Основной фокус — освоение ECS.
+Проект находится в процессе доработки. Основной фокус — освоение ECS.
