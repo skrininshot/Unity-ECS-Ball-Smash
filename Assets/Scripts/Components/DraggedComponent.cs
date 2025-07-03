@@ -4,6 +4,6 @@ namespace Components
 {
     public struct DraggedComponent 
     {
-        public Vector3 DragStart;
+        public Vector3 Direction;
     }
 }

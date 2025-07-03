@@ -15,11 +15,11 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_FogMode: 3
-  m_FogDensity: 0.01
-  m_LinearFogStart: 0
-  m_LinearFogEnd: 300
+  m_FogColor: {r: 0.23137257, g: 0.13333334, b: 0.30588236, a: 1}
+  m_FogMode: 1
+  m_FogDensity: 0.015
+  m_LinearFogStart: 40
+  m_LinearFogEnd: 50
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -484,7 +484,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7821cef017554fbb828212ea4afce8a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 4238923566248049286, guid: 863d3a3fe463dd343ac1de2d09b130bb, type: 3}
   config: {fileID: 11400000, guid: 3194c35a675a85b4589f67a64ceb7773, type: 2}
 --- !u!4 &434605035
 Transform:
@@ -1047,7 +1046,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Current turn:
 
-    <color=#5DC2FFFF>You</color>'
+    <color=#60E000FF>You</color>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1294,7 +1293,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.23239137, g: 0.13361603, b: 0.3065148, a: 0}
+  m_BackGroundColor: {r: 0.1882353, g: 0.21960784, b: 0.38039216, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1317,7 +1316,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 39
   orthographic: 1
   orthographic size: 5.5
   m_Depth: -1
@@ -2355,7 +2354,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e7b5c9a66dd10da499ed90f69741fa5d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3166,7 +3165,7 @@ GameObject:
   - component: {fileID: 1872153954}
   - component: {fileID: 1872153953}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3452,7 +3451,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <color=#5DC2FFFF>4</color>:<color=#FF0000FF>3</color>
+  m_text: <color=#60E000FF>2</color>:<color=#E03900FF>3</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

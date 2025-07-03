@@ -26,13 +26,13 @@ namespace Game
             
             GameStateController.Init(spawner, turnService); 
             uiController.Init(turnService);
-
+            
             _systems
-                .Add(new PlayerBallAimSystem(turnService))
-                .Add(new PlayerBallLaunchSystem(config, turnService))
+                .Add(new PlayerBallAimLaunchSystem(config, turnService))
                 .Add(new AIStrategySystem(config, turnService))
                 .Add(new BallOutSystem(config))
                 .Add(new TurnControlSystem(config))
+                .Add(new DrawDraggedDirectionSystem(config))
                 .Add(new EndGameConditionSystem(config, uiController))
                 .Init();
             

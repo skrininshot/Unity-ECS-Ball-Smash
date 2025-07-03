@@ -28,15 +28,19 @@ namespace Systems
             var aiFilter = world.Filter<BallTag>().Inc<AITag>().Inc<RigidbodyRef>().Exc<DraggedComponent>().End();
             var aiList = new System.Collections.Generic.List<int>();
             foreach (var entity in aiFilter)
-                aiList.Add(entity);
-            
+            {
+                if (rigidbodyPool.Get(entity).Rigidbody.velocity.y >= 0f)
+                    aiList.Add(entity);
+            }
             if (aiList.Count == 0) return;
             
             var playerFilter = world.Filter<BallTag>().Inc<PlayerTag>().Inc<RigidbodyRef>().End();
             var playerList = new System.Collections.Generic.List<int>();
             foreach (var entity in playerFilter)
-                playerList.Add(entity);
-
+            {
+                if (rigidbodyPool.Get(entity).Rigidbody.velocity.y >= 0f)
+                    playerList.Add(entity);
+            }
             if (playerList.Count == 0) return;
 
             int choiceAI = Random.Range(0, aiList.Count);

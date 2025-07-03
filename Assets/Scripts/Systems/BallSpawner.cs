@@ -9,12 +9,11 @@ namespace Systems
 {
     public class BallSpawner : MonoBehaviour 
     {
-        [SerializeField] private GameObject ballPrefab;
         [SerializeField] private GameConfig config;
         
         public GameObject Spawn(Vector3 pos, Vector3 vel, TurnParticipant owner) 
         {
-            var go = Instantiate(ballPrefab, pos, Quaternion.identity);
+            var go = Instantiate(config.ballPrefab, pos, Quaternion.identity);
             go.GetComponent<Rigidbody>().velocity = vel;
             go.GetComponent<BallView>().Owner = owner;
             go.GetComponent<Renderer>().material = owner == TurnParticipant.Player ? config.playerMaterial : config.aiMaterial;

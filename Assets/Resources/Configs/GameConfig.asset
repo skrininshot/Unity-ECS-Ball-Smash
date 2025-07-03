@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7056afdd4c7b4bc6b1953a9d9c87acab, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  destroyHeight: -10
+  destroyHeight: -20
   aiBallsCount: 4
   playerBallsCount: 4
   pauseBetweenTurns: 2
+  ballPrefab: {fileID: 4238923566248049286, guid: 863d3a3fe463dd343ac1de2d09b130bb, type: 3}
   spawnRadius: 4
   spawnMinDistance: 1.2
   playerMaterial: {fileID: 2100000, guid: 4e0424faaeda18749bc1b938dbc6edbe, type: 2}
@@ -23,3 +24,4 @@ MonoBehaviour:
   aiMaterial: {fileID: 2100000, guid: f2b036244f5d2674cbcfd0f9af85b524, type: 2}
   aiForce: 10
   aiInaccuracyMultiplier: 15
+  draggedDirectionViewPrefab: {fileID: 633370403280229312, guid: a91d5917a503ce347a74010063c4ed5c, type: 3}
